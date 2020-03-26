@@ -6,7 +6,7 @@ embeddings and seeing what might be related to treatments for COVID-19.
 
 I don't know a ton about Jupyter Notebooks, so no judging...
 
-### Summary of findings
+## Summary of findings
 
 Some notes on the hits that come up.
 
