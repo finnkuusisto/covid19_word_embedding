@@ -1,3 +1,7 @@
+# BioWordVec models
+bio_embedding_extrinsic
+bio_embedding_intrinsic
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
