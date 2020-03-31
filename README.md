@@ -40,3 +40,25 @@ There is some evidence that Cantharidin can be used to inhibit Hepatitis B
 production, but it's far too toxic to be ingested.
 https://www.ncbi.nlm.nih.gov/pubmed/17458779
 
+
+#### [Chelidonine](https://en.wikipedia.org/wiki/Chelidonine)
+This is a tricky one. Chelidonine is an acetylcholinesterase and
+butyrylcholinesterase inhibitor. Activity is generally associated with the
+central nervous system.
+
+One possible connection is that acetylcholinesterase degrades acetylcholine into
+acetate and choline and, according to Wikipedia:
+>The esteratic subsite, where acetylcholine is hydrolyzed to acetate and choline,
+>contains the catalytic triad of three amino acids: serine 200, histidine 440 and
+>glutamate 327. These three amino acids are similar to the triad in other serine
+>proteases except that the glutamate is the third member rather than aspartate.
+I'm outside my depth at this point, but serine protease TMPRSS2 is important for
+SARS-CoV-2 cell entry. It cuts open the spike protein of the virus. Tangential
+relation to serine protease inhibition then? Importantly, there are several AChE
+inhibitors that are safe and available.
+
+Another possible connection is that chelidonine is the major alkaloid component
+of Chelidonium majus which contains various isoquinoline alkaloids.
+(Hydroxy)Chloroquine, which is currently being investigated for SARS-CoV-2
+treatment, is a derivative of quinoline.
+
