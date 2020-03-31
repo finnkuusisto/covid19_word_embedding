@@ -52,6 +52,7 @@ acetate and choline and, according to Wikipedia:
 >contains the catalytic triad of three amino acids: serine 200, histidine 440 and
 >glutamate 327. These three amino acids are similar to the triad in other serine
 >proteases except that the glutamate is the third member rather than aspartate.
+
 I'm outside my depth at this point, but serine protease TMPRSS2 is important for
 SARS-CoV-2 cell entry. It cuts open the spike protein of the virus. Tangential
 relation to serine protease inhibition then? Importantly, there are several AChE
