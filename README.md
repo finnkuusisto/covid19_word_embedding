@@ -8,6 +8,24 @@ seeing what might be related to treatments for COVID-19.
 I don't know a ton about Jupyter Notebooks, so no judging...
 
 
+## The story so far
+
+I imagine most people who have knowledge of word embeddings are familiar with
+the idea that there is semantic structure in the space, such that you can find
+meaningful analogies.
+
+The typical example of this is: *Man -> King* as *Woman -> ?* points one to
+*Queen*. Effectively, the vector between Man and King represenst some kind of
+"monarch/royalty" vector.
+
+Here, I have just taken this same concept and tried to derive a "treats" vector.
+At time of writing, I have only use metformin and diabetes as my seed analogy,
+and I am using SARS and MERS as my endpoints. Thus, the analogies I am using to
+get hits are: *Metformin -> Diabetes* as *? -> SARS* and *? -> MERS*.
+
+I am then manually evaluating the top hits for each analogy. See my notes below.
+
+
 ## Summary of findings
 
 
