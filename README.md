@@ -81,3 +81,8 @@ of Chelidonium majus which contains various isoquinoline alkaloids.
 (Hydroxy)Chloroquine, which is currently being investigated for SARS-CoV-2
 treatment, is a derivative of quinoline.
 
+#### [SAR405](https://pubchem.ncbi.nlm.nih.gov/compound/sar405)
+SAR405 is a selective Vps34 inhibitor. Vps34 phosphorylates phosphatidylinositol
+to form phosphatidylinositol (3)-phosphate (PtdIns3P). PtdIns3P is a
+phospholipid in cell membranes that recruits proteins to the membrane, many of
+which are involved in protein trafficking.
