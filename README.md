@@ -171,14 +171,20 @@ current COVID-19 investigation have been bolded (kind of positive controls).
 9. cobimetinib fumarate \[0.520\]
    * A MEK inhibitor often used along with BRAF inhibitor (Vemurafinib) to treat melanoma
 10. niclosamide \[0.520\]
-   * Anti-tapeworm treatment that inhibits glucose uptake, oxidative phosphorylation, and anaerobic metabolism
-   * Also under investigation to treat cancers and MRSA
+    * Anti-tapeworm treatment that inhibits glucose uptake, oxidative phosphorylation, and anaerobic metabolism
+    * Also under investigation to treat cancers and MRSA
 11. __lopinavir and ritonavir__ \[0.519\]
-   * This combination has been tested to treat COVID-19 and has so far been found ineffective
+    * This combination has been tested to treat COVID-19 and has so far been found ineffective
 12. temsirolimus \[0.515\]
+    * Prodrug of Sirolimus (Rapamycin) and mTOR inhibitor, used to treat renal cell carcinoma
+    * Sirolimus is used to prevent organ transplant rejection and lymphangioleiomyomatosis (lung diesease)
 13. rilpivirine hydrochloride \[0.511\]
+    * Antiretroviral for HIV
 14. alectinib hydrochloride \[0.509\]
+    * Inhibitor of anaplastic lymphoma kinase (ALK) used to treat non-small-cell lung cancer
+    * Subsequent inhibition of STAT3 and mTOR
 15. lefamulin acetate \[0.508\]
+    * Antibiotic for MRSA
 16. perphenazine and amitriptyline hydrochloride \[0.507\]
 17. alogliptin and metformin hydrochloride \[0.507\]
 18. tamiflu \[0.507\]
@@ -202,7 +208,8 @@ current COVID-19 investigation have been bolded (kind of positive controls).
 36. carisoprodol compound \[0.497\]
 37. triprolidine and pseudoephedrine hydrochlorides w/ codeine \[0.497\]
 38. soma compound w/ codeine \[0.497\]
-39. chloroquine hydrochloride \[0.496\]
+39. __chloroquine hydrochloride__ \[0.496\]
+    * Antimalarial under investigation for COVID-19 treatment
 40. saquinavir mesylate \[0.496\]
 41. linagliptin and metformin hydrochloride \[0.495\]
 42. nilutamide \[0.495\]
