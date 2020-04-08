@@ -40,6 +40,28 @@ will be using this to filter hits from my previous step using two methods:
 * Direct drug name string matching
 * Multi-token vector similarity matching
 
+### Processing FDA approved drug names
+
+I downloaded the [FDA's approved drugs database](
+https://www.fda.gov/drugs/drug-approvals-and-databases/drugsfda-data-files)
+and pulled out a list of individual approved drug names by the following method:
+1. Pulled all entries from the DrugName and ActiveIngredient columns
+2. Removed all text following the first '(' from every entry
+3. Split all entries into their multiple names and active ingredient by ';'
+4. Manually added back in drug/ingredient names lost to step 2
+   * ampicillin
+   * cycrin
+   * hydrocortisone
+   * premarin
+   * sulfabenzamide
+   * sulfacetamide
+   * sulfathiazole
+   * sulfadiazine
+   * sulfamerazine
+   * sulfamethazine
+
+See process_fda_approved_names.ipynb.
+
 ## Results
 
 You'll find notes on some of the most promising results below.
