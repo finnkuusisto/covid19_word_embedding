@@ -61,11 +61,15 @@ See process_fda_approved_names.ipynb.
 
 ## Results
 
-You'll find notes on some of the most promising results below.
+Here are notes on unfiltered hits from the SARS treatment analogy, as well as
+notes on the hits filtered with FDA approved drug names.
 
 ### Potential drug/compound/target hits
 
-#### [SARS-3CLPRO](https://en.wikipedia.org/wiki/C30_Endopeptidase)
+These are notes from my manual assessment of hits on the SARS treatment analogy.
+
+**[SARS-3CLPRO](https://en.wikipedia.org/wiki/C30_Endopeptidase)**
+
 A family of enzymes found in coronaviruses. Cleave the coronavirus polyprotein
 into multiple functional components for viral replication. Potential target for
 inhibition.
@@ -79,7 +83,8 @@ Improved α-Ketoamide Inhibitors
 https://pubmed.ncbi.nlm.nih.gov/32198291/
 
 
-#### [Cantharidin](https://en.wikipedia.org/wiki/Cantharidin)
+**[Cantharidin](https://en.wikipedia.org/wiki/Cantharidin)**
+
 A compound secreted by blister beetles. Causes severe chemical burns and
 blistering when applied to the skin.
 
@@ -92,7 +97,8 @@ production, but it's far too toxic to be ingested.
 https://www.ncbi.nlm.nih.gov/pubmed/17458779
 
 
-#### [Chelidonine](https://en.wikipedia.org/wiki/Chelidonine)
+**[Chelidonine](https://en.wikipedia.org/wiki/Chelidonine)**
+
 This is a tricky one. Chelidonine is an acetylcholinesterase and
 butyrylcholinesterase inhibitor. Activity is generally associated with the
 central nervous system.
@@ -114,7 +120,8 @@ of Chelidonium majus which contains various isoquinoline alkaloids.
 (Hydroxy)Chloroquine, which is currently being investigated for SARS-CoV-2
 treatment, is a derivative of quinoline.
 
-#### [SAR405](https://pubchem.ncbi.nlm.nih.gov/compound/sar405)
+**[SAR405](https://pubchem.ncbi.nlm.nih.gov/compound/sar405)**
+
 SAR405 is a selective Vps34 inhibitor. Vps34 phosphorylates phosphatidylinositol
 to form phosphatidylinositol (3)-phosphate (PtdIns3P). PtdIns3P is a
 phospholipid in cell membranes that recruits proteins to the membrane, many of
