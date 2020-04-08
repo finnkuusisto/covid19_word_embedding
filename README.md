@@ -145,7 +145,8 @@ See biowordvec_covid19_approved_wvavg_match.ipynb.
 
 So again, we get word vectors for the drug names by averaging the individual
 token vectors and then ranking them by their similarity to the SARS treatment
-vector. Here are the top 100 hits, along with cosine similarity.
+vector. Here are the top 100 hits, along with cosine similarity. Hits related to
+current COVID-19 investigation have been bolded (kind of positive controls).
 
 1. gilteritinib fumarate \[0.560\]
    * Gliterinib is an anti-cancer (AML) drug and tyrosine kinase inhibitor (AXL and FLT3)
@@ -155,16 +156,25 @@ vector. Here are the top 100 hits, along with cosine similarity.
    * Another antiviral for influenza A and B, and neuraminidase inhibitor
 4. erdafitinib \[0.529\]
    * Another tyrosine kinase inhibitor (FGFR), for treatment of bladder cancer
-5. atovaquone and proguanil hydrochloride \[0.527\]
+5. __atovaquone and proguanil hydrochloride__ \[0.527\]
    * Antimalarial, including for chloroquine resistant malaria
    * Interesting due to the interest in (hydroxy)chloroquine
 6. rimantadine hydrochloride \[0.525\]
    * Antiviral for influenza A and NMDA receptor antagonist
 7. delavirdine mesylate \[0.524\]
-8. atazanavir sulfate and ritonavir \[0.522\]
+   * Reverse-transcriptase inhibitor used to treat HIV, also a CYP3A4 inhibitor
+   * Skeptical of this hit as SARS-CoV-2 is not a retrovirus, though other antiretrovirals are under investigation
+8. __atazanavir sulfate and ritonavir__ \[0.522\]
+   * Atazanavir is another antiretroviral with mechanism of action specific to HIV protease
+   * Ritonavir is another antiretroviral, but acts generally as a protease inhibitor (CYP3A4 inhibitor)
+   * Note that a combination Lopinavir/Ritonavir was found ineffective in severe COVID-19
 9. cobimetinib fumarate \[0.520\]
+   * A MEK inhibitor often used along with BRAF inhibitor (Vemurafinib) to treat melanoma
 10. niclosamide \[0.520\]
-11. lopinavir and ritonavir \[0.519\]
+   * Anti-tapeworm treatment that inhibits glucose uptake, oxidative phosphorylation, and anaerobic metabolism
+   * Also under investigation to treat cancers and MRSA
+11. __lopinavir and ritonavir__ \[0.519\]
+   * This combination has been tested to treat COVID-19 and has so far been found ineffective
 12. temsirolimus \[0.515\]
 13. rilpivirine hydrochloride \[0.511\]
 14. alectinib hydrochloride \[0.509\]
