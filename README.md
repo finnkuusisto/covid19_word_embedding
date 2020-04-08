@@ -1,5 +1,5 @@
 # covid19_word_embedding
-Playing around with word vectors for SARS-CoV-2. Mucking around with the
+Playing around with word vectors for SARS-CoV-2. Using the
 [BioWordVec](https://github.com/ncbi-nlp/BioWordVec) prebuilt embeddings and
 seeing what might be related to treatments for COVID-19.
 
