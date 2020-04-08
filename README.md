@@ -1,10 +1,7 @@
-# covid19_word_embedding
+# Word Embedding Mining for SARS-CoV-2 and COVID-19
 Playing around with word vectors for SARS-CoV-2. Using the
 [BioWordVec](https://github.com/ncbi-nlp/BioWordVec) prebuilt embeddings and
 seeing what might be related to treatments for COVID-19.
-
-I don't know a ton about Jupyter Notebooks, so no judging...
-
 
 ## Methods
 
