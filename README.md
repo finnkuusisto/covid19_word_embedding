@@ -148,11 +148,18 @@ token vectors and then ranking them by their similarity to the SARS treatment
 vector. Here are the top 100 hits, along with cosine similarity.
 
 1. gilteritinib fumarate \[0.560\]
+   * Gliterinib is an anti-cancer (AML) drug and tyrosine kinase inhibitor (AXL and FLT3)
 2. peramivir \[0.557\]
+   * An antiviral for the flu and neuraminidase inhibitor
 3. zanamivir \[0.547\]
+   * Another antiviral for influenza A and B, and neuraminidase inhibitor
 4. erdafitinib \[0.529\]
+   * Another tyrosine kinase inhibitor (FGFR), for treatment of bladder cancer
 5. atovaquone and proguanil hydrochloride \[0.527\]
+   * Antimalarial, including for chloroquine resistant malaria
+   * Interesting due to the interest in (hydroxy)chloroquine
 6. rimantadine hydrochloride \[0.525\]
+   * Antiviral for influenza A and NMDA receptor antagonist
 7. delavirdine mesylate \[0.524\]
 8. atazanavir sulfate and ritonavir \[0.522\]
 9. cobimetinib fumarate \[0.520\]
