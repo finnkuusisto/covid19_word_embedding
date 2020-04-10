@@ -180,17 +180,42 @@ current COVID-19 investigation have been bolded (kind of positive controls).
 15. lefamulin acetate \[0.508\]
     * Antibiotic for MRSA
 16. perphenazine and amitriptyline hydrochloride \[0.507\]
+    * Perphenazine is an antipsychotic, hits a lot of receptors
+    * Amitriptyline is a tricyclic antidepressant, also hits a lot of receptors
 17. alogliptin and metformin hydrochloride \[0.507\]
+    * Alogliptin is an antidiabetic DPP-4 inhibitor
+    * Metformin is also an antidiabetic - perhaps a result of using Metformin for my analogy?
+    * Interesting relationship of note is that Metformin is a biguanide, some of which are antimalarials
 18. tamiflu \[0.507\]
+    * Oseltamivir is an antiviral for influenza A and B
+    * Neuraminidase inhibitor
 19. selinexor \[0.505\]
+    * An anticancer drug and selective inhibitor of nuclear export
+    * It stops transport from the nucleus to the cytoplasm, causing apoptosis
 20. amprenavir \[0.504\]
+    * Another protease inhibitor for HIV, like Lopinavir and Ritonavir
+    * Tangential relation through renin inhibition, in the same system as angiotensin
 21. ibuprofen and diphenhydramine citrate \[0.504\]
+    * Ibuprofen is an NSAID
+    * Diphenhydramine citrate is an antihistamine
+    * Seeing a lot of these anticholinergics (ACh) showing up
 22. olanzapine and fluoxetine hydrochloride \[0.503\]
+    * Olanzapine is an atypical antipsychotic for schizophrenia and bipolar disorder
+    * Fluoxetine (Prozac) is an SSRI (antidepressant) - hits a lot of targets
 23. probenecid and colchicine \[0.502\]
+    * Combination drug to treat gout
+    * Probenecid increases uric acid excretion in the urine
+    * Colchine is an anti-inflammatory - maybe helpful for cytokine storms?
 24. erlotinib hydrochloride \[0.502\]
+    * An EGFR tyrosine kinase inhibitor used to treat non-small-cell lung cancer
 25. bicalutamide \[0.502\]
+    * A nonsteroidal antiandrogen used to treat prostate cancer
+    * Has a lot of off-label uses
 26. alomide \[0.501\]
+    * An antiallergic that works as a mast cell stabilizer
 27. amantadine hydrochloride \[0.501\]
+    * Nicotinic antagonist and NMDA antagonist used to treat dyskinesia from Parkinson's and influenza A
+    * Prevents influenza A viral shedding
 28. azelastine hydrochloride and fluticasone propionate \[0.501\]
 29. revefenacin \[0.500\]
 30. imipramine pamoate \[0.500\]
