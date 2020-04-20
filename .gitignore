@@ -2,6 +2,12 @@
 bio_embedding_extrinsic
 bio_embedding_intrinsic
 
+# LaTeX stuff
+*.aux
+*.bbl
+*.blg
+*.pdf
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
