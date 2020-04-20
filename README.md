@@ -202,10 +202,11 @@ current COVID-19 investigation have been bolded (kind of positive controls).
 22. olanzapine and fluoxetine hydrochloride \[0.503\]
     * Olanzapine is an atypical antipsychotic for schizophrenia and bipolar disorder
     * Fluoxetine (Prozac) is an SSRI (antidepressant) - hits a lot of targets
-23. probenecid and colchicine \[0.502\]
+23. __probenecid and colchicine__ \[0.502\]
     * Combination drug to treat gout
     * Probenecid increases uric acid excretion in the urine
     * Colchine is an anti-inflammatory - maybe helpful for cytokine storms?
+    * Colchicine now being investigated
 24. erlotinib hydrochloride \[0.502\]
     * An EGFR tyrosine kinase inhibitor used to treat non-small-cell lung cancer
 25. bicalutamide \[0.502\]
