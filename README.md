@@ -160,7 +160,7 @@ current COVID-19 investigation have been bolded (kind of positive controls).
 31. doravirine \[0.500\]
 32. rosiglitazone maleate and metformin hydrochloride \[0.499\]
 33. nefazodone hydrochloride \[0.498\]
-34. mefloquine hydrochloride \[0.498\]
+34. __mefloquine hydrochloride__ \[0.498\]
 35. abacavir sulfate and lamivudine \[0.498\]
 36. carisoprodol compound \[0.497\]
 37. triprolidine and pseudoephedrine hydrochlorides w/ codeine \[0.497\]
