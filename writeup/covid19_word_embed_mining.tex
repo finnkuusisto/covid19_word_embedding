@@ -1,44 +1,177 @@
 \documentclass{article}
 
+\usepackage{fullpage}
+\usepackage[table]{xcolor}
+\newcommand{\lgc}[1]{\cellcolor[gray]{0.85}#1}
+
 \begin{document}
 
-\title{Word Embedding Mining for SARS-CoV-2 and COVID-19}
-\author{Finn Kuusisto}
+\title{Word Embedding Mining for SARS-CoV-2 and COVID-19 Drug Repurposing}
+\author{Finn Kuusisto and David Page and Ron Stewart}
 \maketitle
 
 % ABSTRACT ------------------------------------------------
 \begin{abstract}
+
 This is where the abstract goes.
+
 \end{abstract}
 
 % INTRO ---------------------------------------------------
 \section{Introduction}
+
 Intro goes here.
 
 % METHODS -------------------------------------------------
 \section{Materials and Methods}
-M\&M intro goes here.
+
+In order to perform our word embedding mining for COVID-19 drug repurposing, we first need a word embedding.
+Furthermore, we need drug names to look for within the embedding.
+Here we briefly describe our sources for both the word embedding and drug names, we describe the data processing we perform on these sources, and we describe our methods for analysis.
 
 \subsection{Word Embedding}
-Talk about BioWordVec here \cite{zhang2019biowordvec}.
 
-Talk about how we get our analogy hits from the word embedding.
+Rather than spend the time building our own word embedding on biomedical text, we instead went to the literature where there are several prebuilt biomedical word embeddings available.
+For this work, we chose the BioWordVec\cite{zhang2019biowordvec} prebuilt embedding, specifically the intrinsic model.
+We chose BioWordVec because it is the most recent available biomedical word embedding and has it performed well on several benchmark tasks.
 
-\subsection{FDA Approved Drugs}
-Talk about the source for approved drugs here \cite{fdadrugs}.
+In order to find a vector representation for COVID-19 treatments, we use a simple analogy approach.
+The original Word2vec publication demonstrated that the structure of a word embedding space could carry semantic meaning by showing that \emph{vector(``King'') - vector(``Man'') + vector(``Woman'')} resulted in a vector closest to the word vector for \emph{Queen}\cite{mikolov2013efficient}.
+Effectively, this vector math gives the analogy \emph{King} is to \emph{Man} as what is to \emph{Woman}.
+We use that same approach here, but instead use a common drug-disease pair as the seed analogy and SARS as the query disease: \emph{vector(``Metformin'') - vector(``Diabetes'') + vector(``SARS'')}.
+Effectively, we get the word vector analogy of \emph{Metformin} is to \emph{Diabetes} as what is to \emph{SARS}.
+Note that the BioWordVec embedding we are using was published before SARS-CoV-2 was discovered and thus contains no reference to SARS-CoV-2 or COVID-19 in the vocabulary.
+Given, however, that SARS-CoV-2 is a strain of SARS-CoV\cite{of2020species}, we use SARS as an approximation.
 
-Talk about how they were processed and converted to word vectors.
+To verify that this analogy vector was close to reasonable results, we manually inspected the 20 closest vectors in the embedding vocab (see Table \ref{tab:analogy_top20}).
+We use this analogy vector as our starting point for identifying drugs to treat COVID-19.
+
+
+\subsection{FDA Approved Drug Filtering}
+
+Given the urgency of the situation, we consider drug repurposing the most expedient approach to finding treatments for COVID-19.
+We thus chose to tailor our treatment mining toward finding FDA approved drugs, allowing for the potential of off-label prescription in the short term.
+To get a list of approved drugs for our embedding analysis, we downloaded the FDA's approved drug database\cite{fdadrugs}, extracted the drug names, and processed them for use in the word embedding.
+
+To extract raw drug names from the FDA database, we first pulled all entries from the DrugName and ActiveIngredient fields of the Products table.
+We next manually inspected all raw entries that ended with parentheticals (e.g. ``prempro (premarin;cycrin)'') to identify entries that contain aliases or combinations versus those that contain tokens related to branding or packaging (e.g. ``rogaine (for men)'').
+From these parentheticals, we manually collected additional drug names and then removed all parentheticals from the drug entries.
+These manually collected additional names included included Ampicillin, Cycrin, Hydrocortisone, Premarin, Sulfabenzamide, Sulfacetamide, Sulfathiazole, Sulfadiazine, Sulfamerazine, and Sulfamethazine.
+We then split all of the entries by the semicolon character to separate drug names and ingredients entered as lists.
+Finally, we manually added back in those drugs and ingredients that were manually extracted from the deleted parentheticals.
+This gave us a list of 8,561 candidate approved drug names.
+
+We next converted our candidate drug names into word vectors for ranking by their similarity with our treatment analogy vector.
+Here we simply split each candidate drug by white space and averaged the individual token vectors to get a final vector for the drug overall.
+We ignored individual tokens that were not present in the embedding vocabulary.
+As a result, we successfully derived 6,506 drug vectors from our initial 8,561 candidate drugs.
+We then calculated cosine similarities for all drug vectors with our SARS treatment analogy vector and ranked them from most to least similar.
+We manually inspected the top 50 drug vectors for promising hits (see Table \ref{tab:drugs_top50}).
 
 % RESULTS -------------------------------------------------
 \section{Results}
+
 Results intro here.
 
-Top analogy hits here.
+\begin{table}[ht]
+\small
+\centering
+\caption{The 20 closest word embedding vectors to the SARS treatment analogy vector defined by \emph{vector(``Metformin'') - vector(``Diabetes'') + vector(``SARS'')}. All hits related to drugs or targets are highlighted in gray.}
+\label{tab:analogy_top20}
+\begin{tabular}{c}
+\hline
+Vocabulary Vector \\
+\hline
+sars \\
+sars-cov \\
+\lgc{sars-3cl} \\
+\lgc{sars-3clpro} \\
+sars-like \\
+sars-covs \\
+sars-cov-induced \\
+sars-cov-mediated \\
+sars-cov-like \\
+anti-sars-cov \\
+pcsars-cov \\
+hsars-cov \\
+sars-co \\
+anticoronaviral \\
+\lgc{cantharimide} \\
+\lgc{sar405} \\
+\lgc{peramivir} \\
+norcantharidin-induced \\
+cantharidin-mediated \\
+\lgc{delaviridine} \\
+\hline
+\end{tabular}
+\end{table}
 
-Top 100 approved drug hits here.
+\begin{table}[ht]
+\small
+\centering
+\caption{Top 50 FDA approved drugs identified by word embedding mining.}
+\label{tab:drugs_top50}
+\begin{tabular}[t]{c}
+\hline
+Drug \\
+\hline
+gilteritinib fumarate \\
+peramivir \\
+zanamivir \\
+erdafitinib \\
+atovaquone and proguanil hydrochloride \\
+rimantadine hydrochloride \\
+delavirdine mesylate \\
+\lgc{atazanavir sulfate and ritonavir} \\
+cobimetinib fumarate \\
+niclosamide \\
+\lgc{lopinavir and ritonavir} \\
+temsirolimus \\
+rilpivirine hydrochloride \\
+alectinib hydrochloride \\
+lefamulin acetate \\
+perphenazine and amitriptyline hydrochloride \\
+alogliptin and metformin hydrochloride \\
+tamiflu \\
+selinexor \\
+amprenavir \\
+ibuprofen and diphenhydramine citrate \\
+olanzapine and fluoxetine hydrochloride \\
+\lgc{probenecid and colchicine} \\
+erlotinib hydrochloride \\
+bicalutamide \\
+alomide \\
+amantadine hydrochloride \\
+azelastine hydrochloride and fluticasone propionate \\
+revefenacin \\
+imipramine pamoate \\
+doravirine \\
+rosiglitazone maleate and metformin hydrochloride \\
+nefazodone hydrochloride \\
+\lgc{mefloquine hydrochloride} \\
+abacavir sulfate and lamivudine \\
+carisoprodol compound \\
+triprolidine and pseudoephedrine hydrochlorides w/ codeine \\
+soma compound w/ codeine \\
+\lgc{chloroquine hydrochloride} \\
+saquinavir mesylate \\
+linagliptin and metformin hydrochloride \\
+nilutamide \\
+memantine hydrochloride and donepezil hydrochloride \\
+donepezil hydrochloride and memantine hydrochloride \\
+nelfinavir mesylate \\
+ceritinib \\
+virazole \\
+vorinostat \\
+triprolidine and pseudoephedrine hydrochlorides \\
+fulvestrant \\
+\hline
+\end{tabular}
+\end{table}
 
 % DISCUSSION ----------------------------------------------
 \section{Discussion}
+
 Discussion here.
 
 Discuss top analogy hits and why they're interesting.
