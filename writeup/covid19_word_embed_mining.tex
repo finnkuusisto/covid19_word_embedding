@@ -71,7 +71,18 @@ We manually inspected the top 50 drug vectors for promising hits (see Table \ref
 % RESULTS -------------------------------------------------
 \section{Results}
 
-Results intro here.
+Here we present top results in two forms.
+First, we present the 20 unfiltered closest word vectors to our SARS treatment analogy vector.
+Second, we present the 50 closest FDA approved drug vectors to the analogy vector, thereby filtering to what may be the most promising drugs for repurposing.
+
+The top 20 unfiltered hits are presented in Table \ref{tab:analogy_top20}, and all hits related to drugs or potential drug targets are highlighted in gray.
+This highlighting is simply to verify that there are some reasonable word vectors close to the analogy vector.
+Six of the top 20 unfiltered hits here are drugs or target related.
+
+The top 50 FDA approved drug hits are presented in Table \ref{tab:drugs_top50}, and all drugs that have been or are currently under investigation for treatment of COVID-19 are highlighted in gray.
+This highlighting is to verify that our word vector mining is able to identify some positive controls, suggesting that other hits may be good candidates for further investigation.
+Five of the top 50 drug candidates here are positive controls.
+
 
 \begin{table}[ht]
 \small
@@ -109,7 +120,7 @@ cantharidin-mediated \\
 \begin{table}[ht]
 \small
 \centering
-\caption{Top 50 FDA approved drugs identified by word embedding mining.}
+\caption{Top 50 FDA approved drugs identified by word embedding mining. Hits containing drugs under investigation for COVID-19 are highlighted in gray.}
 \label{tab:drugs_top50}
 \begin{tabular}[t]{c}
 \hline
@@ -122,10 +133,10 @@ erdafitinib \\
 atovaquone and proguanil hydrochloride \\
 rimantadine hydrochloride \\
 delavirdine mesylate \\
-\lgc{atazanavir sulfate and ritonavir} \\
+\lgc{atazanavir sulfate and ritonavir\cite{cao2020trial}} \\
 cobimetinib fumarate \\
 niclosamide \\
-\lgc{lopinavir and ritonavir} \\
+\lgc{lopinavir and ritonavir\cite{cao2020trial}} \\
 temsirolimus \\
 rilpivirine hydrochloride \\
 alectinib hydrochloride \\
@@ -137,7 +148,7 @@ selinexor \\
 amprenavir \\
 ibuprofen and diphenhydramine citrate \\
 olanzapine and fluoxetine hydrochloride \\
-\lgc{probenecid and colchicine} \\
+\lgc{probenecid and colchicine\cite{colcorona}} \\
 erlotinib hydrochloride \\
 bicalutamide \\
 alomide \\
@@ -148,12 +159,12 @@ imipramine pamoate \\
 doravirine \\
 rosiglitazone maleate and metformin hydrochloride \\
 nefazodone hydrochloride \\
-\lgc{mefloquine hydrochloride} \\
+\lgc{mefloquine hydrochloride\cite{Weston2020.03.25.008482}} \\
 abacavir sulfate and lamivudine \\
 carisoprodol compound \\
 triprolidine and pseudoephedrine hydrochlorides w/ codeine \\
 soma compound w/ codeine \\
-\lgc{chloroquine hydrochloride} \\
+\lgc{chloroquine hydrochloride\cite{wang2020remdesivir}} \\
 saquinavir mesylate \\
 linagliptin and metformin hydrochloride \\
 nilutamide \\
