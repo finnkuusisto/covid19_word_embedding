@@ -77,11 +77,11 @@ Second, we present the 50 closest FDA approved drug vectors to the analogy vecto
 
 The top 20 unfiltered hits are presented in Table \ref{tab:analogy_top20}, and all hits related to drugs or potential drug targets are highlighted in gray.
 This highlighting is simply to verify that there are some reasonable word vectors close to the analogy vector.
-Six of the top 20 unfiltered hits here are drugs or target related.
+Five of the top 20 unfiltered hits here are drug or target related.
 
-The top 50 FDA approved drug hits are presented in Table \ref{tab:drugs_top50}, and all drugs that have been or are currently under investigation for treatment of COVID-19 are highlighted in gray.
-This highlighting is to verify that our word vector mining is able to identify some positive controls, suggesting that other hits may be good candidates for further investigation.
-Five of the top 50 drug candidates here are positive controls.
+The top 50 FDA approved drug hits are presented in Table \ref{tab:drugs_top50}, and all drugs that have been suggested or are currently under investigation for treatment of COVID-19 are highlighted in gray.
+This highlighting is to verify that our word vector mining is able to identify positive controls, suggesting that other hits may be good candidates for further investigation.
+Eight of the top 50 drug candidates here are positive controls.
 
 
 \begin{table}[ht]
@@ -108,7 +108,7 @@ hsars-cov \\
 sars-co \\
 anticoronaviral \\
 \lgc{cantharimide} \\
-\lgc{sar405} \\
+sar405 \\
 \lgc{peramivir} \\
 norcantharidin-induced \\
 cantharidin-mediated \\
@@ -120,7 +120,7 @@ cantharidin-mediated \\
 \begin{table}[ht]
 \small
 \centering
-\caption{Top 50 FDA approved drugs identified by word embedding mining. Hits containing drugs under investigation for COVID-19 are highlighted in gray.}
+\caption{Top 50 FDA approved drugs identified by word embedding mining. Hits containing drugs suggested or under investigation for COVID-19 are highlighted in gray.}
 \label{tab:drugs_top50}
 \begin{tabular}[t]{c}
 \hline
@@ -135,7 +135,7 @@ rimantadine hydrochloride \\
 delavirdine mesylate \\
 \lgc{atazanavir sulfate and ritonavir\cite{cao2020trial}} \\
 cobimetinib fumarate \\
-niclosamide \\
+\lgc{niclosamide\cite{xu2020broad}} \\
 \lgc{lopinavir and ritonavir\cite{cao2020trial}} \\
 temsirolimus \\
 rilpivirine hydrochloride \\
@@ -153,7 +153,7 @@ erlotinib hydrochloride \\
 bicalutamide \\
 alomide \\
 amantadine hydrochloride \\
-azelastine hydrochloride and fluticasone propionate \\
+\lgc{azelastine hydrochloride and fluticasone propionate\cite{mccreary2020coronavirus}} \\
 revefenacin \\
 imipramine pamoate \\
 doravirine \\
@@ -170,7 +170,7 @@ linagliptin and metformin hydrochloride \\
 nilutamide \\
 memantine hydrochloride and donepezil hydrochloride \\
 donepezil hydrochloride and memantine hydrochloride \\
-nelfinavir mesylate \\
+\lgc{nelfinavir mesylate\cite{Xu2020.01.27.921627}} \\
 ceritinib \\
 virazole \\
 vorinostat \\
@@ -183,11 +183,45 @@ fulvestrant \\
 % DISCUSSION ----------------------------------------------
 \section{Discussion}
 
-Discussion here.
+Here we review the top hits for both the SARS treatment analogy vector and for the FDA approved drug vectors.
+First, again note that five of the 20 closest word vectors to the treatment analogy vector are related to drug or drug targets.
+We find this result reassuring as it tells us that several of the top hits are at least within the category of results we want to find from this vector.
+Looking deeper into these five hits is even more reassuring as they appear to not be any drugs or targets, but are in fact related to viral treatments, or SARS coronavirus treatments more specifically.
 
-Discuss top analogy hits and why they're interesting.
+For example, ``sars-3cl'' and ``sars-3clpro'' both likely refer to 3C-like proteinase, which is a major protease thought essential to viral replication of coronaviruses, including SARS-CoV and SARS-CoV-2\cite{goetz2007substrate,zhang2020crystal}.
+Cantharimides are cantharidin derivatives, and cantharidin has been shown as potentially useful in therapy for hepatitis B\cite{romero2007effect}.
+Peramivir is an antiviral for influenza, and Delaviridine is a non-nucleoside reverse transcriptase inhibitor (NNRTI) for treatment of human immunodeficiency virus (HIV).
+Other interesting details to note are that Delaviridine is a CYP3A4 inhibitor\cite{famil2006guidelines} like ritonavir, and that SAR405 has been studied in combination with hydroxychloroquine for cancer treatment\cite{shi2017research}.
+The treatment analogy vector is apparently in a reasonable word vector neighborhood.
 
-Discuss top approved drug hits and why they're interesting.
+In our top 50 FDA approved drugs, we find eight that contain drugs either suggested or under investigation for treatment against SARS-CoV-2 and COVID-19.
+The first and third positive hits are combinations of atazanavir and ritonavir, and lopinavir and ritonavir.
+Both combinations are used to treat HIV, and the latter combination is currently in clinical trials for SARS-CoV-2\cite{cao2020trial}.
+The former combination is marked as a hit here simply because of the presence of ritonavir but is prescribed under similar circumstances as the latter.
+The second hit, niclosamide, has demonstrated broad antiviral properties including for SARS-CoV and MERS-CoV, and has thus also been proposed as a potential treatment for SARS-CoV-2\cite{xu2020broad}.
+Next, the combination of probenecid and colchicine is marked as a hit here strictly because of colchicine, an anti-inflammatory, which is currently under investigation\cite{colcorona}.
+The combination is used to treat gout, but colchicine by itself is being studied seemingly for its potential to reduce cytokine storms.
+Fifth is a combination of azelastine, an antihistamine, and fluticasone, a corticosteroid.
+This combination is a hit due to the fluticasone as corticosteroids have been suggested generally for treatment of COVID-19\cite{mccreary2020coronavirus}.
+The next two hits are the antimalarials mefloquine and chloroquine, both of which have been investigated\cite{Weston2020.03.25.008482,wang2020remdesivir}.
+Finally, nelfinavir is an antiretroviral used for HIV that has been suggested based on computed binding to the 3C-like proteinase mentioned earlier.
+
+In addition to the many promising hits, there are at least a few that are less promising.
+For example, peramivir, zanamivir, and Tamiflu (oseltamivir), are all neuraminidase inhibitors used to treat influenza.
+While they are thus antivirals, coronaviruses do not use neuraminidase, so these drugs are not likely to be effective for SARS-CoV-2\cite{mccreary2020coronavirus}.
+Nevertheless, we should expect to find false positives in our top hits along with the true positives.
+
+% CONCLUSION ----------------------------------------------
+\section{Conclusion}
+
+We present a word embedding mining approach to identifying candidate treatments for SARS-CoV-2 and COVID-19.
+We first use a common drug-disease pair to produce a treatment analogy vector for SARS using a prebuild biomedical word embedding.
+We then use a simple word vector averaging approach to get word vectors for a list of FDA approved drugs and sort them by their distance to our treatment analogy vector.
+Finally, we manually evaluate the top 50 candidate drugs and find several positive controls that have been suggested in the literature or are currently under investigation for SARS-CoV-2 or COVID-19 treatment.
+While there are certain to be several false positives amongst our top hits as well, we find the presence of positive controls reassuring, and propose the remainder as potential candidates for further investigation.
+We furthermore suggest this word vector embedding approach in general as a useful tool for COVID-19 drug repurposing.
+These results only scratch the surface of what is possible and we present this work as a suggestion to the community to investigate further.
+Immediate avenues for future investigation include investigating more drug-disease analogy vectors, ranking drugs directly by their cosine similarity to proven treatments as they arise, and investigating drug-gene target analogy vectors rather than the disease treatment analogy we demonstrate here.
 
 % REFERENCES ----------------------------------------------
 \bibliographystyle{unsrt}
