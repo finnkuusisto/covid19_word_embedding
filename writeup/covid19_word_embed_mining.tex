@@ -3,6 +3,7 @@
 \usepackage{fullpage}
 \usepackage[table]{xcolor}
 \newcommand{\lgc}[1]{\cellcolor[gray]{0.85}#1}
+\usepackage{hyperref}
 
 \begin{document}
 
@@ -20,7 +21,23 @@ This is where the abstract goes.
 % INTRO ---------------------------------------------------
 \section{Introduction}
 
-Intro goes here.
+The severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) and the associated coronavirus disease 2019 (COVID-19) were first identified in December of 2019 and have since spread to become a global pandemic\cite{world2020director}.
+This rapid spread of illness and death demands a rapid response in treatment development.
+Traditional drug development, however, is slow, expensive, and suffers from low probability of success\cite{ashburn2004drug}.
+In contrast, drug repurposing, identifying new indications for existing drugs, offers the advantages of reduced time and risk to finding treatments.
+We thus propose that drug repurposing is the most promising approach to treatment development for this pandemic.
+
+There are several strategies we could employ for drug repurposing.
+Certainly, getting access to the rapidly growing electronic health record (EHR) histories of those afflicted by COVID-19 could be enlightening.
+We could, for example, track patient recovery times and look for common prescription histories in those who recover sooner.
+Gaining access to sufficient EHR data would likely prove challenging though due to privacy concerns and limited data at individual institutions, not to mention the added administrative burden that might entail for an already strained system.
+Given the similarity of SARS-CoV-2 to its predecessor SARS-CoV\cite{wu2020genome}, we propose leveraging what we have learned about SARS in the intervening years.
+Specifically, we propose mining a word embedding built on biomedical literature published through 2019 for candidate FDA approved drugs to treat SARS.
+Our results show that our proposed approach identifies several promising candidate drugs that have already been suggested or are already in clinical trials for COVID-19.
+We thus propose other candidate drugs identified by our method as promising leads for further investigation via in vitro and in vivo experimentation.
+
+In the following sections, we describe our word embedding source, our source and processing for FDA approved drug names, and our approach to mining the word embedding for drugs to treat SARS.
+We then present our results and a discussion including manual evaluation of the top 50 candidate drugs proposed by our method, followed by a conclusion and suggestions for future work.
 
 % METHODS -------------------------------------------------
 \section{Materials and Methods}
@@ -28,6 +45,7 @@ Intro goes here.
 In order to perform our word embedding mining for COVID-19 drug repurposing, we first need a word embedding.
 Furthermore, we need drug names to look for within the embedding.
 Here we briefly describe our sources for both the word embedding and drug names, we describe the data processing we perform on these sources, and we describe our methods for analysis.
+Code and data used for all of this analysis can be found at \url{https://github.com/finnkuusisto/covid19_word_embedding}.
 
 \subsection{Word Embedding}
 
@@ -209,13 +227,13 @@ Finally, nelfinavir is an antiretroviral used for HIV that has been suggested ba
 In addition to the many promising hits, there are at least a few that are less promising.
 For example, peramivir, zanamivir, and Tamiflu (oseltamivir), are all neuraminidase inhibitors used to treat influenza.
 While they are thus antivirals, coronaviruses do not use neuraminidase, so these drugs are not likely to be effective for SARS-CoV-2\cite{mccreary2020coronavirus}.
-Nevertheless, we should expect to find false positives in our top hits along with the true positives.
+Nevertheless, we should expect to find false positives in our top hits along with true positives.
 
 % CONCLUSION ----------------------------------------------
 \section{Conclusion}
 
 We present a word embedding mining approach to identifying candidate treatments for SARS-CoV-2 and COVID-19.
-We first use a common drug-disease pair to produce a treatment analogy vector for SARS using a prebuild biomedical word embedding.
+We first use a common drug-disease pair to produce a treatment analogy vector for SARS using a prebuilt biomedical word embedding.
 We then use a simple word vector averaging approach to get word vectors for a list of FDA approved drugs and sort them by their distance to our treatment analogy vector.
 Finally, we manually evaluate the top 50 candidate drugs and find several positive controls that have been suggested in the literature or are currently under investigation for SARS-CoV-2 or COVID-19 treatment.
 While there are certain to be several false positives amongst our top hits as well, we find the presence of positive controls reassuring, and propose the remainder as potential candidates for further investigation.
