@@ -4,11 +4,16 @@
 \usepackage[table]{xcolor}
 \newcommand{\lgc}[1]{\cellcolor[gray]{0.85}#1}
 \usepackage{hyperref}
+\usepackage{authblk}
 
 \begin{document}
 
 \title{Word Embedding Mining for SARS-CoV-2 and COVID-19 Drug Repurposing}
-\author{Finn Kuusisto and David Page and Ron Stewart}
+\author[1]{Finn Kuusisto}
+\author[2]{David Page}
+\author[1]{Ron Stewart}
+\affil[1]{Morgridge Institute for Research, Madison, WI}
+\affil[2]{Duke University, Durham, NC}
 \maketitle
 
 % ABSTRACT ------------------------------------------------
@@ -20,6 +25,7 @@ Due to the difficulty of accessing electronic health record (EHR) data in the mi
 In particular, we propose a method of mining a large biomedical word embedding for FDA approved drugs based on a drug-disease treatment analogy.
 We find several drugs that have been suggested or are currently in clinical trials for COVID-19 in our top hits and present the rest as promising leads for further experimental investigation.
 We thus find our approach promising and present it, along with suggestions for future work, to the computational drug repurposing community at large as another tool to help fight the pandemic.
+Code and data for our methods can be found at \url{https://github.com/finnkuusisto/covid19_word_embedding}.
 
 \end{abstract}
 
@@ -72,7 +78,7 @@ We use this analogy vector as our starting point for identifying drugs to treat 
 
 \subsection{FDA Approved Drug Filtering}
 
-Given the urgency of the situation, we consider drug repurposing the most expedient approach to finding treatments for COVID-19.
+Given the urgency of the situation, we consider drug repurposing the most appropriate approach to finding treatments for COVID-19.
 We thus chose to tailor our treatment mining toward finding FDA approved drugs, allowing for the potential of off-label prescription in the short term.
 To get a list of approved drugs for our embedding analysis, we downloaded the FDA's approved drug database\cite{fdadrugs}, extracted the drug names, and processed them for use in the word embedding.
 
@@ -107,8 +113,8 @@ This highlighting is to verify that our word vector mining is able to identify p
 Eight of the top 50 drug candidates here are positive controls.
 
 
-\begin{table}[ht]
-\small
+\begin{table}[t!]
+\footnotesize
 \centering
 \caption{The 20 closest word embedding vectors to the SARS treatment analogy vector defined by \emph{vector(``Metformin'') - vector(``Diabetes'') + vector(``SARS'')}. All hits related to drugs or targets are highlighted in gray.}
 \label{tab:analogy_top20}
@@ -140,8 +146,16 @@ cantharidin-mediated \\
 \end{tabular}
 \end{table}
 
-\begin{table}[ht]
-\small
+% DISCUSSION ----------------------------------------------
+\section{Discussion}
+
+Here we review the top hits for both the SARS treatment analogy vector and for the FDA approved drug vectors.
+First, again note that five of the 20 closest word vectors to the treatment analogy vector are related to drug or drug targets.
+We find this result reassuring as it tells us that several of the top hits are at least within the category of results we want to find from this vector.
+Looking deeper into these five hits is even more reassuring as they appear to not be any drugs or targets, but are in fact related to viral treatments, or SARS coronavirus treatments more specifically.
+
+\begin{table}[t!]
+\footnotesize
 \centering
 \caption{Top 50 FDA approved drugs identified by word embedding mining. Hits containing drugs suggested or under investigation for COVID-19 are highlighted in gray.}
 \label{tab:drugs_top50}
@@ -202,14 +216,6 @@ fulvestrant \\
 \hline
 \end{tabular}
 \end{table}
-
-% DISCUSSION ----------------------------------------------
-\section{Discussion}
-
-Here we review the top hits for both the SARS treatment analogy vector and for the FDA approved drug vectors.
-First, again note that five of the 20 closest word vectors to the treatment analogy vector are related to drug or drug targets.
-We find this result reassuring as it tells us that several of the top hits are at least within the category of results we want to find from this vector.
-Looking deeper into these five hits is even more reassuring as they appear to not be any drugs or targets, but are in fact related to viral treatments, or SARS coronavirus treatments more specifically.
 
 For example, ``sars-3cl'' and ``sars-3clpro'' both likely refer to 3C-like proteinase, which is a major protease thought essential to viral replication of coronaviruses, including SARS-CoV and SARS-CoV-2\cite{goetz2007substrate,zhang2020crystal}.
 Cantharimides are cantharidin derivatives, and cantharidin has been shown as potentially useful in therapy for hepatitis B\cite{romero2007effect}.
