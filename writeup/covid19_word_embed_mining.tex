@@ -235,10 +235,20 @@ This combination is a hit due to the fluticasone as corticosteroids have been su
 The next two hits are the antimalarials mefloquine and chloroquine, both of which have been investigated\cite{Weston2020.03.25.008482,wang2020remdesivir}.
 Finally, nelfinavir is an antiretroviral used for HIV that has been suggested based on computed binding to the 3C-like proteinase mentioned earlier.
 
-In addition to the many promising hits, there are at least a few that are less promising.
-For example, peramivir, zanamivir, and Tamiflu (oseltamivir), are all neuraminidase inhibitors used to treat influenza.
-While they are thus antivirals, coronaviruses do not use neuraminidase, so these drugs are not likely to be effective for SARS-CoV-2\cite{mccreary2020coronavirus}.
-Nevertheless, we should expect to find false positives in our top hits along with true positives.
+
+% LIMITATIONS ---------------------------------------------
+\section{Limitations}
+
+Of course, while our method appears to have promise, it is not without limitations.
+First, our method is limited to what has already been published in the scientific literature.
+We also caution readers that these drugs have not been tested for COVID-19 efficacy, and we make no claims other than that some of these drugs deserve further exploration.
+For example, we can say with some confidence that there are at least a few proposed drugs that are less promising.
+Peramivir, zanamivir, and Tamiflu (oseltamivir), are all neuraminidase inhibitors used to treat influenza.
+While they are thus antivirals, coronaviruses do not use neuraminidase, so these particular drugs are not likely to be effective against SARS-CoV-2\cite{mccreary2020coronavirus}.
+We should expect to find false positives in our top hits along with true positives.
+Finally, our embedding approach does not take into account the potential of drug-drug interactions to increase or decrease efficacy in any fashion.
+In vitro and in vivo experimentation, and observational EHR or claims data would all be useful sources of evidence for or against repurposing candidates listed here.
+
 
 % CONCLUSION ----------------------------------------------
 \section{Conclusion}
@@ -248,9 +258,9 @@ We first use a common drug-disease pair to produce a treatment analogy vector fo
 We then use a simple word vector averaging approach to get word vectors for a list of FDA approved drugs and sort them by their distance to our treatment analogy vector.
 Finally, we manually evaluate the top 50 candidate drugs and find several positive controls that have been suggested in the literature or are currently under investigation for SARS-CoV-2 or COVID-19 treatment.
 While there are certain to be several false positives amongst our top hits as well, we find the presence of positive controls reassuring, and propose the remainder as potential candidates for further investigation.
-We furthermore suggest this word vector embedding approach in general as a useful tool for COVID-19 drug repurposing.
+We furthermore propose this word vector embedding approach in general as a useful tool for COVID-19 drug repurposing.
 These results only scratch the surface of what is possible and we present this work as a suggestion to the community to investigate further.
-Immediate avenues for future investigation include investigating more drug-disease analogy vectors, ranking drugs directly by their cosine similarity to proven treatments as they arise, and investigating drug-gene target analogy vectors rather than the disease treatment analogy we demonstrate here.
+Immediate avenues for future investigation include exploring more drug-disease analogy vectors, ranking drugs directly by their cosine similarity to proven treatments as they arise, and investigating drug-gene target analogy vectors rather than the disease treatment analogy we demonstrate here.
 
 % REFERENCES ----------------------------------------------
 \bibliographystyle{unsrt}
