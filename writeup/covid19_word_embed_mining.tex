@@ -5,6 +5,7 @@
 \newcommand{\lgc}[1]{\cellcolor[gray]{0.85}#1}
 \usepackage{hyperref}
 \usepackage{authblk}
+\usepackage{graphicx}
 
 \begin{document}
 
@@ -116,32 +117,34 @@ Nine of the top 50 drug candidates here are positive controls.
 \begin{table}[t!]
 \footnotesize
 \centering
-\caption{The 20 closest word vectors to the SARS treatment analogy vector defined by \emph{vector(``Metformin'') - vector(``Diabetes'') + vector(``SARS'')}. All hits related to drugs or targets are highlighted in gray.}
+\caption{The 20 closest word vectors to the SARS treatment analogy vectors  \emph{vector(Seed Drug) - vector(Seed Disease) + vector(``SARS'')}. All hits related to drugs or targets are highlighted in gray.}
 \label{tab:analogy_top20}
-\begin{tabular}{c}
+\begin{tabular}{c c c}
 \hline
-Vocabulary Vector \\
+\multicolumn{3}{c}{Word Embedding Treatment Analogy Nearest Raw Hits} \\
 \hline
-sars \\
-sars-cov \\
-\lgc{sars-3cl} \\
-\lgc{sars-3clpro} \\
-sars-like \\
-sars-covs \\
-sars-cov-induced \\
-sars-cov-mediated \\
-sars-cov-like \\
-anti-sars-cov \\
-pcsars-cov \\
-hsars-cov \\
-sars-co \\
-anticoronaviral \\
-\lgc{cantharimide} \\
-sar405 \\
-\lgc{peramivir} \\
-norcantharidin-induced \\
-cantharidin-mediated \\
-\lgc{delaviridine} \\
+Metformin-Diabetes & Benazepril-Hypertension & Albuterol-Asthma \\
+\hline
+sars & sars & sars \\
+sars-cov & \lgc{sars-3cl} & sars-cov \\
+\lgc{sars-3cl} & \lgc{sars-3clpro} & csars \\
+\lgc{sars-3clpro} & sars- & sars-covs \\
+sars-like & sars-cov & sarspp \\
+sars-covs & sars-covs & sars-like \\
+sars-cov-induced & p-sars & sars-cov-like \\
+sars-cov-mediated & sars-like & \lgc{peramivir} \\
+sars-cov-like & sarsp & \lgc{vero-pipecuronium} \\
+anti-sars-cov & sars-cov-like & sarsp \\
+pcsars-cov & sars-hcov & \lgc{pancuronium-metocurine} \\
+hsars-cov & anti-sars-cov & sars-hcov \\
+sars-co & sars-s & sarse \\
+anticoronaviral & coronavirion & pcsars-cov \\
+\lgc{cantharimide} & lycodine & \lgc{sars-3cl} \\
+sar405 & sarspp & p-sars \\
+\lgc{peramivir} & sarse & \lgc{sars-3clpro} \\
+norcantharidin-induced & sars-cov-s & sars- \\
+cantharidin-mediated & sars-cov- & sars-coronavirus \\
+\lgc{delaviridine} & pcsars-cov & \lgc{pralidoxime} \\
 \hline
 \end{tabular}
 \end{table}
@@ -157,11 +160,11 @@ Looking deeper into these five hits is even more reassuring as they appear to no
 \begin{table}[t!]
 \footnotesize
 \centering
-\caption{Top 50 FDA approved drugs identified by word embedding mining. Hits containing drugs suggested or under investigation for COVID-19 are highlighted in gray.}
-\label{tab:drugs_top50}
+\caption{Top 50 FDA approved drugs identified by word embedding mining with the Metformin-Diabetes analogy. Hits containing drugs suggested or under investigation for COVID-19 are highlighted in gray.}
+\label{tab:drugs_metf_top50}
 \begin{tabular}[t]{c}
 \hline
-Drug \\
+Metformin-Diabetes as ?-SARS \\
 \hline
 gilteritinib fumarate \\
 peramivir \\
@@ -199,8 +202,8 @@ nefazodone hydrochloride \\
 \lgc{mefloquine hydrochloride\cite{Weston2020.03.25.008482}} \\
 abacavir sulfate and lamivudine \\
 carisoprodol compound \\
-triprolidine and pseudoephedrine hydrochlorides w/ codeine \\
-soma compound w/ codeine \\
+triprolidine and pseudoephedrine hydrochlorides codeine \\
+soma compound codeine \\
 \lgc{chloroquine hydrochloride\cite{wang2020remdesivir}} \\
 saquinavir mesylate \\
 linagliptin and metformin hydrochloride \\
@@ -213,6 +216,132 @@ virazole \\
 vorinostat \\
 triprolidine and pseudoephedrine hydrochlorides \\
 fulvestrant \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[t!]
+\footnotesize
+\centering
+\caption{Top 50 FDA approved drugs identified by word embedding mining with the Benazepril-Hypertension analogy. Hits containing drugs suggested or under investigation for COVID-19 are highlighted in gray.}
+\label{tab:drugs_benz_top50}
+\begin{tabular}[t]{c}
+\hline
+Benazepril-Hypertension as ?-SARS \\
+\hline
+peramivir \\
+tamiflu \\
+zanamivir \\
+gilteritinib fumarate \\
+rimantadine hydrochloride \\
+benazepril hydrochloride \\
+doravirine \\
+galantamine hydrobromide \\
+cetirizine hydrochloride hives \\
+lanadelumab \\
+aliskiren hemifumarate \\
+desloratadine \\
+entacapone \\
+invirase \\
+daclatasvir dihydrochloride \\
+indacaterol maleate \\
+loratadine \\
+peganone \\
+nitazoxanide \\
+denavir \\
+triprolidine and pseudoephedrine hydrochlorides codeine \\
+rivastigmine \\
+telavancin hydrochloride \\
+donepezil hydrochloride \\
+triprolidine and pseudoephedrine hydrochlorides \\
+tazemetostat hydrobromide \\
+relenza \\
+benazepril hydrochloride and hydrochlorothiazide \\
+nulojix \\
+ecallantide \\
+alectinib hydrochloride \\
+virazole \\
+levocetirizine hydrochloride \\
+memantine hydrochloride and donepezil hydrochloride \\
+donepezil hydrochloride and memantine hydrochloride \\
+amantadine hydrochloride \\
+cetirizine hydrochloride \\
+comtan \\
+fluvoxamine maleate \\
+amlodipine besylate and benazepril hydrochloride \\
+delafloxacin meglumine \\
+acrivastine \\
+dalbavancin hydrochloride \\
+fexofenadine hydrochloride hives \\
+rilpivirine hydrochloride \\
+aricept \\
+bendamustine hydrochloride \\
+viramune xr \\
+revefenacin \\
+olodaterol hydrochloride \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[t!]
+\footnotesize
+\centering
+\caption{Top 50 FDA approved drugs identified by word embedding mining with the Albuterol-Asthma analogy. Hits containing drugs suggested or under investigation for COVID-19 are highlighted in gray.}
+\label{tab:drugs_albu_top50}
+\begin{tabular}[t]{c}
+\hline
+Albuterol-Asthma as ?-SARS \\
+\hline
+peramivir \\
+albuterol \\
+albuterol sulfate \\
+albuterol sulfate and ipratropium bromide \\
+zanamivir \\
+rimantadine hydrochloride \\
+pralidoxime chloride \\
+meperidine and atropine sulfate \\
+amantadine hydrochloride \\
+doxacurium chloride \\
+biperiden lactate \\
+atropine sulfate syringe \\
+gallamine triethiodide \\
+atropine and demerol \\
+colistin sulfate \\
+oseltamivir phosphate \\
+revefenacin \\
+dextromethorphan hydrobromide and quinidine sulfate \\
+conivaptan hydrochloride \\
+glycopyrronium tosylate \\
+cefiderocol sulfate tosylate \\
+fentanyl citrate and droperidol \\
+pancuronium bromide \\
+relenza \\
+telavancin hydrochloride \\
+guaifenesin and dextromethorphan hydrobromide \\
+diphenoxylate hydrochloride and atropine sulfate \\
+esketamine hydrochloride \\
+galantamine hydrobromide \\
+naloxone hydrochloride and pentazocine hydrochloride \\
+glycopyrrolate \\
+levalbuterol hydrochloride \\
+calfactant \\
+rilpivirine hydrochloride \\
+pipecuronium bromide \\
+tamiflu \\
+biperiden hydrochloride \\
+mivacurium chloride \\
+metocurine iodide \\
+ceftolozane sulfate \\
+atropine sulfate \\
+terbutaline sulfate \\
+nesiritide recombinant \\
+diphenoxylate hydrochloride atropine sulfate \\
+tubocurarine chloride \\
+benzonatate \\
+rapacuronium bromide \\
+naloxone hydrochloride \\
+propoxyphene hydrochloride and acetaminophen \\
+acetaminophen and pentazocine hydrochloride \\
 \hline
 \end{tabular}
 \end{table}
@@ -235,6 +364,14 @@ Next is a combination of azelastine, an antihistamine, and fluticasone, a cortic
 This combination is a hit due to the fluticasone as corticosteroids have been suggested generally for treatment of COVID-19\cite{mccreary2020coronavirus}.
 The next two hits are the antimalarials mefloquine and chloroquine, both of which have been investigated\cite{Weston2020.03.25.008482,wang2020remdesivir}.
 Finally, nelfinavir is an antiretroviral used for HIV that has been suggested, like zanamivir, based on computed binding to the 3C-like proteinase.
+
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{drugvenn}
+\caption{Venn diagram of the drug candidates identified by each SARS treatment analogy vector.}
+\label{fig:drug_venn}
+\end{figure}
 
 
 % LIMITATIONS ---------------------------------------------
