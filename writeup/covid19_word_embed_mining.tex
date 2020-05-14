@@ -3,6 +3,7 @@
 \usepackage{fullpage}
 \usepackage[table]{xcolor}
 \newcommand{\lgc}[1]{\cellcolor[gray]{0.85}#1}
+\usepackage{multirow}
 \usepackage{hyperref}
 \usepackage{authblk}
 \usepackage{graphicx}
@@ -22,8 +23,8 @@
 
 The rapid spread of illness and death caused by the severe respiratory syndrome coronavirus 2 (SARS-CoV-2) and its associated coronavirus disease 2019 (COVID-19) demands a rapid response in treatment development.
 Limitations of de novo drug development, however, suggest that drug repurposing is best suited to meet this demand.
-Due to the difficulty of accessing electronic health record (EHR) data in the midst of a global pandemic, and due to the similarity between SARS-CoV-2 and SARS-CoV, we propose mining the extensive biomedical literature for treatments to SARS that may also then be appropriate for COVID-19.
-In particular, we propose a method of mining a large biomedical word embedding for FDA approved drugs based on a drug-disease treatment analogy.
+Due to the difficulty of accessing electronic health record (EHR) data in general and in the midst of a global pandemic, and due to the similarity between SARS-CoV-2 and SARS-CoV, we propose mining the extensive biomedical literature for treatments to SARS that may also then be appropriate for COVID-19.
+In particular, we propose a method of mining a large biomedical word embedding for FDA approved drugs based on drug-disease treatment analogies.
 We find several drugs that have been suggested or are currently in clinical trials for COVID-19 in our top hits and present the rest as promising leads for further experimental investigation.
 We thus find our approach promising and present it, along with suggestions for future work, to the computational drug repurposing community at large as another tool to help fight the pandemic.
 Code and data for our methods can be found at \url{https://github.com/finnkuusisto/covid19_word_embedding}.
@@ -42,76 +43,14 @@ We thus propose that drug repurposing is the most promising approach to treatmen
 There are several strategies we could employ for drug repurposing.
 Certainly, getting access to the rapidly growing electronic health record (EHR) histories of those afflicted by COVID-19 could be enlightening.
 We could, for example, track patient recovery times and look for common prescription histories in those who recover sooner.
-Gaining access to sufficient EHR data would likely prove challenging though due to privacy concerns and limited data at individual institutions, not to mention the added administrative burden that might entail for an already strained system.
+Gaining access to sufficient EHR data would likely prove challenging though due to privacy concerns and limited data at individual institutions, not to mention the added administrative burden that might entail for an already strained health system.
 Given the similarity of SARS-CoV-2 to its predecessor SARS-CoV\cite{wu2020genome}, we propose leveraging what we have learned about SARS in the intervening years.
-Specifically, we propose mining a word embedding built on biomedical literature published through 2019 for candidate FDA approved drugs to treat SARS.
+Specifically, we propose mining a word embedding built on biomedical literature published through early 2019 for candidate FDA approved drugs to treat SARS.
 Our results show that our proposed approach identifies several promising candidate drugs that have already been suggested or are already in clinical trials for COVID-19.
-We thus propose other candidate drugs identified by our method as promising leads for further investigation via in vitro and in vivo experimentation.
+We thus propose other candidate drugs identified by our method as potential leads for further investigation via in vitro and in vivo experimentation.
 
-In the following sections, we describe our word embedding source, our source and processing for FDA approved drug names, and our approach to mining the word embedding for drugs to treat SARS.
-We then present our results and a discussion including manual evaluation of the top 50 candidate drugs proposed by our method, followed by a conclusion and suggestions for future work.
-
-% METHODS -------------------------------------------------
-\section{Materials and Methods}
-
-In order to perform our word embedding mining for COVID-19 drug repurposing, we first need a word embedding.
-Furthermore, we need drug names to look for within the embedding.
-Here we briefly describe our sources for both the word embedding and drug names, we describe the data processing we perform on these sources, and we describe our methods for analysis.
-Code and data used for all of this analysis can be found at \url{https://github.com/finnkuusisto/covid19_word_embedding}.
-
-\subsection{Word Embedding}
-
-Rather than spend the time building our own word embedding on biomedical text, we instead went to the literature where there are several prebuilt biomedical word embeddings available.
-For this work, we chose the BioWordVec\cite{zhang2019biowordvec} prebuilt embedding, specifically the intrinsic model.
-We chose BioWordVec because it is the most recent available biomedical word embedding and has it performed well on several benchmark tasks.
-
-In order to find a vector representation for COVID-19 treatments, we use a simple analogy approach.
-The original Word2vec publication demonstrated that the structure of a word embedding space could carry semantic meaning by showing that \emph{vector(``King'') - vector(``Man'') + vector(``Woman'')} resulted in a vector closest to the word vector for \emph{Queen}\cite{mikolov2013efficient}.
-Effectively, this vector math gives the analogy \emph{King} is to \emph{Man} as what is to \emph{Woman}.
-We use that same approach here, but instead use a common drug-disease pair as the seed analogy and SARS as the query disease: \emph{vector(``Metformin'') - vector(``Diabetes'') + vector(``SARS'')}.
-Effectively, we get the word vector analogy of \emph{Metformin} is to \emph{Diabetes} as what is to \emph{SARS}.
-Note that the BioWordVec embedding we are using was published before SARS-CoV-2 was discovered and thus contains no reference to SARS-CoV-2 or COVID-19 in the vocabulary.
-Given, however, that SARS-CoV-2 is a strain of SARS-CoV\cite{of2020species}, we use SARS as an approximation.
-
-To verify that this analogy vector was close to reasonable results, we manually inspected the 20 closest vectors in the embedding vocab (see Table \ref{tab:analogy_top20}).
-We use this analogy vector as our starting point for identifying drugs to treat COVID-19.
-
-
-\subsection{FDA Approved Drug Filtering}
-
-Given the urgency of the situation, we consider drug repurposing the most appropriate approach to finding treatments for COVID-19.
-We thus chose to tailor our treatment mining toward finding FDA approved drugs, allowing for the potential of off-label prescription in the short term.
-To get a list of approved drugs for our embedding analysis, we downloaded the FDA's approved drug database\cite{fdadrugs}, extracted the drug names, and processed them for use in the word embedding.
-
-To extract raw drug names from the FDA database, we first pulled all entries from the DrugName and ActiveIngredient fields of the Products table.
-We next manually inspected all raw entries that ended with parentheticals (e.g. ``prempro (premarin;cycrin)'') to identify entries that contain aliases or combinations versus those that contain tokens related to branding or packaging (e.g. ``rogaine (for men)'').
-From these parentheticals, we manually collected additional drug names and then removed all parentheticals from the drug entries.
-These manually collected additional names included included Ampicillin, Cycrin, Hydrocortisone, Premarin, Sulfabenzamide, Sulfacetamide, Sulfathiazole, Sulfadiazine, Sulfamerazine, and Sulfamethazine.
-We then split all of the entries by the semicolon character to separate drug names and ingredients entered as lists.
-Finally, we manually added back in those drugs and ingredients that were manually extracted from the deleted parentheticals.
-This gave us a list of 8,561 candidate approved drug names.
-
-We next converted our candidate drug names into word vectors for ranking by their similarity with our treatment analogy vector.
-Here we simply split each candidate drug by white space and averaged the individual token vectors to get a final vector for the drug overall.
-We ignored individual tokens that were not present in the embedding vocabulary.
-As a result, we successfully derived 6,506 drug vectors from our initial 8,561 candidate drugs.
-We then calculated cosine similarities for all drug vectors with our SARS treatment analogy vector and ranked them from most to least similar.
-We manually inspected the top 50 drug vectors for promising hits (see Table \ref{tab:drugs_top50}).
-
-% RESULTS -------------------------------------------------
-\section{Results}
-
-Here we present top results in two forms.
-First, we present the 20 unfiltered closest word vectors to our SARS treatment analogy vector.
-Second, we present the 50 closest FDA approved drug vectors to the analogy vector, thereby filtering to what may be the most promising drugs for repurposing.
-
-The top 20 unfiltered hits are presented in Table \ref{tab:analogy_top20}, and all hits related to drugs or potential drug targets are highlighted in gray.
-This highlighting is simply to verify that there are some reasonable word vectors close to the analogy vector.
-Five of the top 20 unfiltered hits here are drug or target related.
-
-The top 50 FDA approved drug hits are presented in Table \ref{tab:drugs_top50}, and all drugs that have been suggested or are currently under investigation for treatment of COVID-19 are highlighted in gray.
-This highlighting is to verify that our word vector mining is able to identify positive controls, suggesting that other hits may be good candidates for further investigation.
-Nine of the top 50 drug candidates here are positive controls.
+In the following sections, we describe our word embedding source, our source and processing method for FDA approved drug names, and our approach to mining the word embedding for drugs to treat SARS.
+We then present our results and a discussion including manual evaluation of the top candidate drugs proposed by our method, followed by a conclusion and suggestions for future work.
 
 
 \begin{table}[t!]
@@ -149,6 +88,221 @@ cantharidin-mediated & sars-cov- & sars-coronavirus \\
 \end{tabular}
 \end{table}
 
+% METHODS -------------------------------------------------
+\section{Materials and Methods}
+
+In order to perform our word embedding mining for COVID-19 drug repurposing, we first need a word embedding.
+Furthermore, we need drug names to look for within the embedding.
+Here we briefly describe our sources for both the word embedding and drug names, we describe the data processing we perform on these sources, and we describe our methods for analysis.
+Code and data used for all of this analysis can be found at \url{https://github.com/finnkuusisto/covid19_word_embedding}.
+
+\subsection{Word Embedding}
+
+Rather than spend the time building our own word embedding on biomedical text, we instead searched the literature where there are several prebuilt biomedical word embeddings available.
+For this work, we chose the BioWordVec\cite{zhang2019biowordvec} prebuilt embedding, specifically the intrinsic model.
+We chose BioWordVec because it is the most recent available biomedical word embedding and has it performed well on several benchmark tasks.
+
+In order to find a vector representation for COVID-19 treatments, we use a simple analogy approach.
+The original Word2vec publication demonstrated that the structure of a word embedding space could carry semantic meaning by showing that \emph{vector(``King'') - vector(``Man'') + vector(``Woman'')} resulted in a vector closest to the word vector for \emph{Queen}\cite{mikolov2013efficient}.
+Effectively, this vector math asks the analogy \emph{King} is to \emph{Man} as what is to \emph{Woman}?
+We use the same approach here, but instead use common drug-disease pairs as the seed analogy and SARS as the query disease.
+For example, one analogy we use is: \emph{vector(``Metformin'') - vector(``Diabetes'') + vector(``SARS'')}.
+Effectively, we get the word vector analogy of \emph{Metformin} is to \emph{Diabetes} as what is to \emph{SARS}?
+Note that the BioWordVec embedding we are using was published before SARS-CoV-2 was discovered and thus contains no reference to SARS-CoV-2 or COVID-19 in the vocabulary.
+Given, that SARS-CoV-2 is a strain of SARS-CoV\cite{of2020species}, we use SARS as an approximation.
+To get a sense of analogy consistency, we use three separate drug-disease pairs as our seed treatment analogies: metformin and diabetes, benazepril and hypertension, and albuterol and asthma.
+
+As a preliminary validation that our analogy vectors were close to reasonable results, we manually inspected the 20 closest vectors in the embedding vocab (see Table \ref{tab:analogy_top20}) for each of our seed drug-disease pairs.
+For this preliminary validation, we wanted to find potential drugs and drug targets near the analogy vector as we use these analogy vectors as our starting point for filtering to FDA approved drugs to treat COVID-19.
+
+
+\subsection{FDA Approved Drug Filtering}
+
+Given the urgency of the situation, we consider drug repurposing the most appropriate approach to finding treatments for COVID-19.
+We thus chose to tailor our treatment mining toward finding FDA approved drugs, allowing for the potential of off-label prescription in the short term.
+To get a list of approved drugs for our embedding analysis, we downloaded the FDA's approved drug database\cite{fdadrugs}, extracted the drug names, and processed them for use in the word embedding.
+
+To extract raw drug names from the FDA database, we first pulled all entries from the DrugName and ActiveIngredient fields of the Products table.
+We next manually inspected all raw entries that ended with parentheticals (e.g. ``prempro (premarin;cycrin)'') to identify entries that contain aliases or combinations versus those that contain tokens related to branding or packaging (e.g. ``rogaine (for men)'').
+From these parentheticals, we manually collected additional drug names and then removed all parentheticals from the drug entries.
+These manually collected additional names included Ampicillin, Cycrin, Hydrocortisone, Premarin, Sulfabenzamide, Sulfacetamide, Sulfathiazole, Sulfadiazine, Sulfamerazine, and Sulfamethazine.
+We then split all of the entries by the semicolon character to separate drug names and ingredients entered as lists.
+Finally, we manually added back in those drugs and ingredients that were manually extracted from the deleted parentheticals.
+This gave us a list of 8,561 candidate approved drug names.
+
+We next converted our candidate drug names into word vectors for ranking by their similarity with our treatment analogy vector.
+Here we simply split each candidate drug by white space and averaged the individual token vectors to get a final vector for the drug overall.
+When a token was not present in the embedding vocabulary, we simply dropped that token from the average and from the initial drug name.
+We used this approach rather than dropping a drug entirely to allow greater flexibility, for example if the embedding vocabulary is missing an ingredient from a combination drug.
+As a result, we successfully derived 5,850 distinct drug vectors from our initial 8,561 candidate drugs.
+We then sort these drug vectors by cosine similarity with our treatment analogy vectors and evaluate the closest hits.
+
+As a preliminary validation that our approach can work to find useful drugs for diseases from treatment analogy vectors, we first considered major diseases and disease families with well-known treatments.
+Specifically, we used our treatment analogy vector approach to rank drugs for the query diseases Alzheimer's, allergies, and cancer (see Tables \ref{tab:drugs_val_alzh}, \ref{tab:drugs_val_alrg}, and \ref{tab:drugs_val_cncr}).
+Note that we still used the same seed drug-disease pairs here (metformin-diabetes, benazepril-hypertension, and albuterol-asthma) but searched for analogous treatments for Alzheimer's, allergies, and cancer instead of SARS.
+For example, one analogy we used for initial validation is: \emph{vector(``Metformin'') - vector(``Diabetes'') + vector(``Alzheimer's'')}.
+For this preliminary validation, we wanted to find drugs whose main indication is to treat the query disease in the top candidates.
+We chose these query diseases because they are fairly broad and have minimal treatment overlap with the seed drug-disease pairs that we used for the analogy.
+After initial validation of our method, we manually reviewed the top 50 drug candidates for SARS using the same method (see Tables \ref{tab:drugs_metf_top50}, \ref{tab:drugs_benz_top50}, and \ref{tab:drugs_albu_top50}).
+
+\begin{table}[t!]
+\footnotesize
+\centering
+\caption{The top 10 candidate drugs for Alzheimer's from each of the three seed drug-disease analogies. Drugs with a primary indication for Alzheimer's are highlighted in gray.}
+\label{tab:drugs_val_alzh}
+\begin{tabular}{c l}
+\hline
+\multicolumn{2}{c}{Top 10 Candidate Drugs for Alzheimer's from each Analogy} \\
+\hline
+\multirow{10}{*}{Metformin-Diabetes} & \lgc{rivastigmine} \\
+& \lgc{donepezil hydrochloride} \\
+& \lgc{galantamine hydrobromide} \\
+& \lgc{donepezil hydrochloride and memantine hydrochloride} \\
+& \lgc{memantine hydrochloride and donepezil hydrochloride} \\
+& \lgc{memantine hydrochloride} \\
+& selegiline \\
+& \lgc{rivastigmine tartrate} \\
+& rasagiline mesylate \\
+& sulindac \\
+\hline
+\multirow{10}{*}{Benazepril-Hypertension} & \lgc{rivastigmine} \\
+& \lgc{aricept} \\
+& \lgc{rivastigmine tartrate} \\
+& \lgc{donepezil hydrochloride} \\
+& selegiline \\
+& entacapone \\
+& \lgc{galantamine hydrobromide} \\
+& \lgc{aricept odt} \\
+& \lgc{memantine hydrochloride} \\
+& rasagiline mesylate \\
+\hline
+\multirow{10}{*}{Albuterol-Asthma} & \lgc{galantamine hydrobromide} \\
+& \lgc{rivastigmine} \\
+& \lgc{donepezil hydrochloride} \\
+& \lgc{rivastigmine tartrate} \\
+& \lgc{memantine hydrochloride} \\
+& \lgc{donepezil hydrochloride and memantine hydrochloride} \\
+& \lgc{memantine hydrochloride and donepezil hydrochloride} \\
+& biperiden lactate \\
+& \lgc{exelon} \\
+& \lgc{tacrine hydrochloride} \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[t!]
+\footnotesize
+\centering
+\caption{The top 10 candidate drugs for allergies from each of the three seed drug-disease analogies. Drugs with a primary indication for allergies are highlighted in gray.}
+\label{tab:drugs_val_alrg}
+\begin{tabular}{c l}
+\hline
+\multicolumn{2}{c}{Top 10 Candidate Drugs for Allergies from each Analogy} \\
+\hline
+\multirow{10}{*}{Metformin-Diabetes} & \lgc{cetirizine hydrochloride allergy} \\
+& \lgc{fexofenadine hydrochloride allergy} \\
+& \lgc{zyrtec allergy} \\
+& \lgc{rhinocort allergy} \\
+& \lgc{xyzal allergy 24hr} \\
+& \lgc{azelastine hydrochloride and fluticasone propionate} \\
+& \lgc{loratadine} \\
+& \lgc{cetirizine hydrochloride hives} \\
+& \lgc{ketotifen fumarate} \\
+& \lgc{fexofenadine hydrochloride hives} \\
+\hline
+\multirow{10}{*}{Benazepril-Hypertension} & \lgc{cetirizine hydrochloride allergy} \\
+& \lgc{zyrtec allergy} \\
+& \lgc{fexofenadine hydrochloride allergy} \\
+& \lgc{rhinocort allergy} \\
+& \lgc{cetirizine hydrochloride hives} \\
+& \lgc{desloratadine} \\
+& \lgc{loratadine} \\
+& \lgc{fexofenadine hydrochloride hives} \\
+& \lgc{acrivastine} \\
+& \lgc{xyzal allergy 24hr} \\
+\hline
+\multirow{10}{*}{Albuterol-Asthma} & albuterol \\
+& \lgc{cetirizine hydrochloride allergy} \\
+& \lgc{fexofenadine hydrochloride allergy} \\
+& albuterol sulfate \\
+& levalbuterol hydrochloride \\
+& albuterol sulfate and ipratropium bromide \\
+& \lgc{diphenhydramine citrate} \\
+& \lgc{diphenhydramine hydrochloride preservative free} \\
+& levalbuterol tartrate \\
+& \lgc{triprolidine pseudoephedrine hydrochloride and codeine phosphate} \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[t!]
+\footnotesize
+\centering
+\caption{The top 10 candidate drugs for cancer from each of the three seed drug-disease analogies. Drugs with a primary indication for cancer are highlighted in gray.}
+\label{tab:drugs_val_cncr}
+\begin{tabular}{c l}
+\hline
+\multicolumn{2}{c}{Top 10 Candidate Drugs for Cancer from each Analogy} \\
+\hline
+\multirow{10}{*}{Metformin-Diabetes} & \lgc{lapatinib} \\
+& \lgc{cisplatin} \\
+& \lgc{fulvestrant} \\
+& \lgc{bicalutamide} \\
+& \lgc{docetaxel} \\
+& \lgc{gefitinib} \\
+& \lgc{tamoxifen citrate} \\
+& \lgc{gemcitabine} \\
+& \lgc{erlotinib hydrochloride} \\
+& \lgc{toremifene citrate} \\
+\hline
+\multirow{10}{*}{Benazepril-Hypertension} & \lgc{bicalutamide} \\
+& \lgc{docetaxel} \\
+& \lgc{cisplatin} \\
+& \lgc{gemcitabine} \\
+& \lgc{exemestane} \\
+& \lgc{lapatinib} \\
+& \lgc{fulvestrant} \\
+& \lgc{erlotinib hydrochloride} \\
+& \lgc{gefitinib} \\
+& \lgc{carboplatin} \\
+\hline
+\multirow{10}{*}{Albuterol-Asthma} & \lgc{docetaxel} \\
+& \lgc{toremifene citrate} \\
+& \lgc{tamoxifen citrate} \\
+& \lgc{erlotinib hydrochloride} \\
+& \lgc{gemcitabine hydrochloride} \\
+& \lgc{cisplatin} \\
+& \lgc{bicalutamide} \\
+& \lgc{doxorubicin hydrochloride} \\
+& \lgc{gemcitabine} \\
+& \lgc{epirubicin hydrochloride} \\
+\hline
+\end{tabular}
+\end{table}
+
+% RESULTS -------------------------------------------------
+\section{Results}
+
+Here we present results for validation of our word embedding mining approach along with results from applying our approach for COVID-19 drug repurposing.
+First, we present the 20 unfiltered closest embedding vocab vectors to our SARS treatment analogy vectors in Table \ref{tab:analogy_top20} with all hits related to drugs or potential drug targets highlighted in gray.
+This highlighting is simply to verify that there are reasonable vocab vectors close to the analogy vectors.
+Five of the top 20 unfiltered hits are drug or target-related for the metformin-diabetes analogy, two of the top 20 hits are highlighted for the benazepril-hypertension analogy, and six of 20 hits are highlighted for the albuterol-asthma analogy.
+
+Next, we present validation results for our approach to ranking FDA approved drugs for three diseases or disease families with well-established treatments.
+Specifically, we use the same three seed drug-disease pairs as analogies to find drugs for Alzheimer's, allergies, and cancer (see Tables \ref{tab:drugs_val_alzh}, \ref{tab:drugs_val_alrg}, and \ref{tab:drugs_val_cncr}).
+All drugs with a primary indication for the query disease are highlighted in gray.
+This is to verify that our complete approach (drug vectors ranked by cosine similarity to treatment analogy vector) can identify effective ground-truth drugs for diseases that are not closely related to the seed disease-drug pair.
+In nearly every example, a vast majority (if not all) of the top 10 hits have a primary indication for the query disease.
+
+Finally, we present the 50 closest FDA approved drugs to the treatment analogy vectors for SARS, thereby filtering to what may be the most promising drugs for repurposing.
+The top repurposing hits are presented in Tables \ref{tab:drugs_metf_top50}, \ref{tab:drugs_benz_top50}, and \ref{tab:drugs_albu_top50}, and all drugs that have been suggested for or are currently under investigation for treatment of COVID-19 are highlighted in gray.
+This highlighting serves a partial evaluation of the repurposing via positive controls, suggesting that other hits may be good candidates for further investigation.
+We find 19 positive control hits out of 50 for the metformin-diabetes analogy, 12 of 50 for the benazepril-hypertension analogy, and five of 50 for the albuterol-asthma analogy.
+We present a Venn diagram of the overlap between the three analogies in Figure \ref{fig:drug_venn}, and a table containing the drugs shared by all three and by at least two of the analogies in Table \ref{tab:drug_venn_23}.
+Seven drugs are shared by all three analogies in their top 50 hits, and another 11 are shared by at least two of the analogies for a total of 18 higher confidence hits.
+
 % DISCUSSION ----------------------------------------------
 \section{Discussion}
 
@@ -157,7 +311,7 @@ First, again note that five of the 20 closest word vectors to the treatment anal
 We find this result reassuring as it tells us that several of the top hits are at least within the category of results we want to find from this vector.
 Looking deeper into these five hits is even more reassuring as they appear to not be any drugs or targets, but are in fact related to viral treatments, or SARS coronavirus treatments more specifically.
 
-\begin{table}[t!]
+\begin{table}[p]
 \footnotesize
 \centering
 \caption{Top 50 FDA approved drugs identified by word embedding mining with the Metformin-Diabetes analogy. Hits containing drugs suggested or under investigation for COVID-19 are highlighted in gray.}
@@ -220,7 +374,7 @@ fulvestrant \\
 \end{tabular}
 \end{table}
 
-\begin{table}[t!]
+\begin{table}[p]
 \footnotesize
 \centering
 \caption{Top 50 FDA approved drugs identified by word embedding mining with the Benazepril-Hypertension analogy. Hits containing drugs suggested or under investigation for COVID-19 are highlighted in gray.}
@@ -283,7 +437,7 @@ olodaterol hydrochloride \\
 \end{tabular}
 \end{table}
 
-\begin{table}[t!]
+\begin{table}[p]
 \footnotesize
 \centering
 \caption{Top 50 FDA approved drugs identified by word embedding mining with the Albuterol-Asthma analogy. Hits containing drugs suggested or under investigation for COVID-19 are highlighted in gray.}
@@ -372,6 +526,39 @@ Finally, nelfinavir is an antiretroviral used for HIV that has been suggested, l
 \caption{Venn diagram of the drug candidates identified by each SARS treatment analogy vector.}
 \label{fig:drug_venn}
 \end{figure}
+
+
+\begin{table}[t!]
+\footnotesize
+\centering
+\caption{The SARS drug repurposing candidates that are common to all three analogies, and those common to two analogies.}
+\label{tab:drug_venn_23}
+\begin{tabular}{c l}
+\hline
+\multicolumn{2}{c}{Drug Repurposing Candidate Commonality for SARS} \\
+\hline
+\multirow{7}{*}{Common to all} & amantadine hydrochloride \\ 
+& peramivir \\ 
+& revefenacin \\ 
+& rilpivirine hydrochloride \\ 
+& rimantadine hydrochloride \\ 
+& tamiflu \\ 
+& zanamivir \\
+\hline
+\multirow{11}{*}{Common to two} & alectinib hydrochloride \\ 
+& donepezil hydrochloride and memantine hydrochloride \\ 
+& doravirine \\ 
+& galantamine hydrobromide \\ 
+& gilteritinib fumarate \\ 
+& memantine hydrochloride and donepezil hydrochloride \\ 
+& relenza \\ 
+& telavancin hydrochloride \\ 
+& triprolidine and pseudoephedrine hydrochlorides \\ 
+& triprolidine and pseudoephedrine hydrochlorides codeine \\ 
+& virazole \\
+\hline
+\end{tabular}
+\end{table}
 
 
 % LIMITATIONS ---------------------------------------------
