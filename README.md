@@ -11,4 +11,4 @@ Using the [BioWordVec](https://github.com/ncbi-nlp/BioWordVec) prebuilt embeddin
 See `covid19_word_embed_mining.ipynb` for the main analysis.
 See `process_fda_approved_names.ipynb` for FDA approved drug name preprocessing.
 
-Licensed under CC-BY-4.0.
+Licensed under CC0-1.0.
