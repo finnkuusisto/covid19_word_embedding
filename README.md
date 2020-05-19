@@ -10,3 +10,5 @@ We thus find our approach promising and present it, along with suggestions for f
 Using the [BioWordVec](https://github.com/ncbi-nlp/BioWordVec) prebuilt embeddings and the [FDA's approved drugs database](https://www.fda.gov/drugs/drug-approvals-and-databases/drugsfda-data-files).
 See `covid19_word_embed_mining.ipynb` for the main analysis.
 See `process_fda_approved_names.ipynb` for FDA approved drug name preprocessing.
+
+Licensed under CC-BY-4.0.
